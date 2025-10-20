@@ -21,32 +21,14 @@ class XmlReaderFormController extends Controller {
             $xml_reader = simplexml_load_string($xml_content);
             $xml_content_array = json_decode(json_encode($xml_reader), true);
 
-            $historico_query = $this->generate_historico_query($xml_content_array);
             $s2200_query = $this->generate_2200_query($xml_content_array);
+            $historico_query = $this->generate_historico_query($xml_content_array);
             $s2200_dependent_query = $this->generate_2200_dependent_query($xml_content_array);
 
             $file = fopen(__DIR__."/../../queries.txt", "a+");
             fwrite($file, "\n\n\n\n" . $historico_query . "\n\n" . $s2200_query . "\n\n" . $s2200_dependent_query);
             fclose($file);
         }
-    }
-
-    private function generate_historico_query($xml)
-    {
-        $idevento = "\"".$xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]."\"";
-        $evento = "\""."S2200"."\"";
-        $status = "\""."P"."\"";
-        $criado_por = 1;
-        $alterado_por = 1;
-        $message = "\"201 - Lote processado com sucesso.  - \"";
-        $protocolo = "\"".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recepcao"]["protocoloEnvioLote"]."\"";
-        $cnpj = "\"".$_POST['cnpj']."\"";
-        $nr_recibo = "\"".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]."\"";
-        
-        $query = "INSERT INTO esocial.historico (idevento, evento, status, criado_por, alterado_por, message, protocolo, cnpj, nr_recibo)\n"
-            . "VALUES ($idevento, $evento, $status, $criado_por, $alterado_por, $message, $protocolo, $cnpj, $nr_recibo);";
-
-        return $query;
     }
 
     private function generate_2200_query($xml)
@@ -185,19 +167,42 @@ class XmlReaderFormController extends Controller {
         return $query;
     }
 
+    private function generate_historico_query($xml)
+    {
+        $idevento = "\"".$xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]."\"";
+        $evento = "\""."S2200"."\"";
+        $status = "\""."P"."\"";
+        $criado_por = 1;
+        $alterado_por = 1;
+        $message = "\"201 - Lote processado com sucesso.  - \"";
+        $protocolo = "\"".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recepcao"]["protocoloEnvioLote"]."\"";
+        $cnpj = "\"".$_POST['cnpj']."\"";
+        $nr_recibo = "\"".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]."\"";
+        
+        $insertQuery = "INSERT INTO esocial.historico (idevento, evento, status, criado_por, alterado_por, message, protocolo, cnpj, nr_recibo)\n"
+            . "VALUES ($idevento, $evento, $status, $criado_por, $alterado_por, $message, $protocolo, $cnpj, $nr_recibo);";
+        $updateQuery = "UPDATE esocial.historico h SET evento_id = s.id FROM esocial.s2200 s WHERE h.evento = 'S2200' AND h.idevento = s.idevento;";
+        
+        $query = $insertQuery . " " . $updateQuery;
+
+        return $query;
+    }
+
     public function generate_2200_dependent_query($xml)
     {
-        $tpdep = null;
-        $nmdep = null;
-        $dtnascto = null;
-        $cpfdep = null;
+        $dependente = $xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["trabalhador"]["dependente"];
+
+        $tpdep = $dependente["tpDep"];
+        $nmdep = $dependente["nmDep"];
+        $dtnascto = $dependente["dtNascto"];
+        $cpfdep = $dependente["cpfDep"];
         $sexodep = null;
-        $depirrf = null;
-        $depsf = null;
-        $inctrab = null;
+        $depirrf = $dependente["depIRRF"];
+        $depsf = $dependente["depSF"];
+        $inctrab = $dependente["incTrab"];
         $s2200_id = null;
-        $criado_por = null;
-        $alterado_por = null;
+        $criado_por = 1;
+        $alterado_por = 1;
         $descrdep = null;
     }
 
