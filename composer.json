@@ -1,0 +1,18 @@
+{
+    "name": "alyssoncpc/query_generator",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Alyssoncpc\\QueryGenerator\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alysson-Chrysthian",
+            "email": "alyssonchrysthian@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

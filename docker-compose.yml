@@ -1,0 +1,27 @@
+services:
+
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes: 
+      - ./app/DB/data/:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    networks:
+      - app_network
+
+  app:
+    build: .
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www/html/
+    env_file:
+      - ./.env
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
