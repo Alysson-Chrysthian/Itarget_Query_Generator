@@ -23,10 +23,15 @@ class XmlReaderFormController extends Controller {
 
             $s2200_query = $this->generate_2200_query($xml_content_array);
             $historico_query = $this->generate_historico_query($xml_content_array);
-            $s2200_dependent_query = $this->generate_2200_dependent_query($xml_content_array);
+            $s2200_dependent_query = null;
+
+            if (isset($xml["dependente"]))
+                $s2200_dependent_query = $this->generate_2200_dependent_query($xml_content_array);
+
+            $queries = $s2200_query . "\n\n" . $historico_query . ($s2200_dependent_query ? "\n\n" . $s2200_dependent_query : "");
 
             $file = fopen(__DIR__."/../../queries.txt", "a+");
-            fwrite($file, "\n\n\n\n" . $historico_query . "\n\n" . $s2200_query . "\n\n" . $s2200_dependent_query);
+            fwrite($file, "\n\n\n" . $queries);
             fclose($file);
         }
     }
