@@ -191,6 +191,8 @@ class XmlReaderFormController extends Controller {
     public function generate_2200_dependent_query($xml)
     {
         $dependente = $xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["trabalhador"]["dependente"];
+        $matricula = $xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["vinculo"]["matricula"];
+
 
         $tpdep = $dependente["tpDep"];
         $nmdep = $dependente["nmDep"];
@@ -200,10 +202,14 @@ class XmlReaderFormController extends Controller {
         $depirrf = $dependente["depIRRF"];
         $depsf = $dependente["depSF"];
         $inctrab = $dependente["incTrab"];
-        $s2200_id = null;
         $criado_por = 1;
         $alterado_por = 1;
         $descrdep = null;
+
+        $query = "INSERT INTO esocial.s2200_dependente (tpdep, nmdep, dtnascto, cpfdep, sexodep, depirrf, depsf, inctrab, s2200_id, criado_por, alterado_por, descrdep) "
+            . "VALUES($tpdep, $nmdep, $dtnascto, $cpfdep, $sexodep, $depirrf, $depsf, $inctrab, (SELECT id FROM esocial.s2200 s WHERE s.matricula = $matricula), $criado_por, $alterado_por, $descrdep);";
+    
+        return $query;
     }
 
 }
