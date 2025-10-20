@@ -194,17 +194,17 @@ class XmlReaderFormController extends Controller {
         $matricula = $xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["vinculo"]["matricula"];
 
 
-        $tpdep = $dependente["tpDep"];
-        $nmdep = $dependente["nmDep"];
-        $dtnascto = $dependente["dtNascto"];
-        $cpfdep = $dependente["cpfDep"];
-        $sexodep = null;
-        $depirrf = $dependente["depIRRF"];
-        $depsf = $dependente["depSF"];
-        $inctrab = $dependente["incTrab"];
+        $tpdep = "\"".$dependente["tpDep"]."\"";
+        $nmdep = "\"".$dependente["nmDep"]."\"";
+        $dtnascto = "\"".$dependente["dtNascto"]."\"";
+        $cpfdep = "\"".$dependente["cpfDep"]."\"";
+        $sexodep = "null";
+        $depirrf = "\"".$dependente["depIRRF"]."\"";
+        $depsf = "\"".$dependente["depSF"]."\"";
+        $inctrab = "\"".$dependente["incTrab"]."\"";
         $criado_por = 1;
         $alterado_por = 1;
-        $descrdep = null;
+        $descrdep = "null";
 
         $query = "INSERT INTO esocial.s2200_dependente (tpdep, nmdep, dtnascto, cpfdep, sexodep, depirrf, depsf, inctrab, s2200_id, criado_por, alterado_por, descrdep) "
             . "VALUES($tpdep, $nmdep, $dtnascto, $cpfdep, $sexodep, $depirrf, $depsf, $inctrab, (SELECT id FROM esocial.s2200 s WHERE s.matricula = $matricula), $criado_por, $alterado_por, $descrdep);";
