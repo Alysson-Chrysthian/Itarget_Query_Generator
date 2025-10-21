@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault()
-        
+
+        const cpfs = document.querySelector('#cpfs-input').value
         const cnpj = document.querySelector('#cnpj-input').value
         const xmls = document.querySelector('#xml-input').files
 
@@ -20,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < xmls.length; i++)
             formData.append(`xml_${i}`, xmls[i])
         formData.append('cnpj', cnpj)
+        if (cpfs)
+            formData.append('cpfs', cpfs)
 
         fetch('/generate-query', {
             method: 'POST',

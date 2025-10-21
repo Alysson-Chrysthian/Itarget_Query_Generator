@@ -13,6 +13,10 @@ class XmlReaderFormController extends Controller {
 
     public function generateQuery()
     {
+        $cpfs = null;
+        if (isset($_POST['cpfs']))
+            $cpfs = explode(',', $_POST['cpfs']);
+
         foreach ($_FILES as $xml) {    
             $xml_content = file_get_contents($xml['tmp_name']);
 
@@ -20,6 +24,9 @@ class XmlReaderFormController extends Controller {
 
             $xml_reader = simplexml_load_string($xml_content);
             $xml_content_array = json_decode(json_encode($xml_reader), true);
+
+            if ($cpfs != null && !in_array($xml_content_array["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["trabalhador"]["cpfTrab"], $cpfs))
+                continue;
 
             $s2200_query = $this->generate_2200_query($xml_content_array);
             $historico_query = $this->generate_historico_query($xml_content_array);

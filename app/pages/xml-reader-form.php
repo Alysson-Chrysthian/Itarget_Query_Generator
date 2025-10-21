@@ -17,6 +17,13 @@
             action="/generate-query"
         >
             <div>
+                <label for="cpfs-input">CPFs</label>
+                <input 
+                    type="text"
+                    id="cpfs-input"
+                >
+            </div>
+            <div>
                 <label for="cnpj-input">CNPJ</label>
                 <input
                     type="text"
