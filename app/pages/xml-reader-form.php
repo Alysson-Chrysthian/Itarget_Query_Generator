@@ -21,6 +21,7 @@
                 <input 
                     type="text"
                     id="cpfs-input"
+                    placeholder="11122233300,44455566600"
                 >
             </div>
             <div>
