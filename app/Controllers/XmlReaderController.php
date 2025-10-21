@@ -44,53 +44,53 @@ class XmlReaderFormController extends Controller {
         $vinculo = $xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["vinculo"];
 
         // table cols
-        $idevento = "\'".$xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]."\'";
-        $indretif = "\'".$ideevento["indRetif"]."\'";
+        $idevento = isset($xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]) ? "\'".$xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]."\'" : "null";
+        $indretif = isset($ideevento["indRetif"]) ? "\'".$ideevento["indRetif"]."\'" : "null";
         $nrrecibo = "null";
         if ($indretif == 2)
-            $nrrecibo = "\'".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]."\'";
-        $tpamb = "\'".$ideevento["tpAmb"];
-        $procemi = "\'".$ideevento["procEmi"]."\'";
-        $verproc = "\'".$ideevento["verProc"]."\'";
+            $nrrecibo = isset($xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]) ? "\'".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]."\'" : "null";
+        $tpamb = isset($ideevento["tpAmb"]) ? "\'".$ideevento["tpAmb"] : "null";
+        $procemi = isset($ideevento["procEmi"]) ? "\'".$ideevento["procEmi"]."\'" : "null";
+        $verproc = isset($ideevento["verProc"]) ? "\'".$ideevento["verProc"]."\'" : "null";
         
-        $tpinsc = "\'".$ideempregador["tpInsc"]."\'";
-        $nrinsc = "\'".$ideempregador["nrInsc"]."\'";
+        $tpinsc = isset($ideempregador["tpInsc"]) ?  "\'".$ideempregador["tpInsc"]."\'" : "null";
+        $nrinsc = isset($ideempregador["nrInsc"]) ? "\'".$ideempregador["nrInsc"]."\'" : "null";
 
-        $cpftrab = "\'".$trabalhador["cpfTrab"]."\'";
-        $nmtrab = "\'".$trabalhador["nmTrab"]."\'";
-        $sexo = "\'".$trabalhador["sexo"]."\'";
-        $racacor = "\'".$trabalhador["racaCor"]."\'";
-        $estciv = "\'".$trabalhador["estCiv"]."\'";
-        $grauinstr = "\'".$trabalhador["grauInstr"]."\'";
+        $cpftrab = isset($trabalhador["cpfTrab"]) ? "\'".$trabalhador["cpfTrab"]."\'" : "null";
+        $nmtrab = isset($trabalhador["nmTrab"]) ? "\'".$trabalhador["nmTrab"]."\'" : "null";
+        $sexo = isset($trabalhador["sexo"]) ? "\'".$trabalhador["sexo"]."\'" : "null";
+        $racacor = isset($trabalhador["racaCor"]) ? "\'".$trabalhador["racaCor"]."\'" : "null";
+        $estciv = isset($trabalhador["estCiv"]) ? "\'".$trabalhador["estCiv"]."\'" : "null";
+        $grauinstr = isset($trabalhador["grauInstr"]) ? "\'".$trabalhador["grauInstr"]."\'" : "null";
         $nmsoc = "null";
-        $dtnascto = "\'".$trabalhador["nascimento"]["dtNascto"]."\'";
-        $paisnascto = "\'".$trabalhador["nascimento"]["paisNascto"]."\'";
-        $paisnac = "\'".$trabalhador["nascimento"]["paisNac"]."\'";
-        $tplograd = "\'".$trabalhador["endereco"]["brasil"]["tpLograd"]."\'";
-        $dsclograd = "\'".$trabalhador["endereco"]["brasil"]["dscLograd"]."\'";
-        $nrlograd = "\'".$trabalhador["endereco"]["brasil"]["nrLograd"]."\'";
+        $dtnascto = isset($trabalhador["nascimento"]["dtNascto"]) ? "\'".$trabalhador["nascimento"]["dtNascto"]."\'" : "null";
+        $paisnascto = isset($trabalhador["nascimento"]["paisNascto"]) ? "\'".$trabalhador["nascimento"]["paisNascto"]."\'" : "null";
+        $paisnac = isset($trabalhador["nascimento"]["paisNac"]) ? "\'".$trabalhador["nascimento"]["paisNac"]."\'" : "null";
+        $tplograd = isset($trabalhador["endereco"]["brasil"]["tpLograd"]) ? "\'".$trabalhador["endereco"]["brasil"]["tpLograd"]."\'" : "null";
+        $dsclograd = isset($trabalhador["endereco"]["brasil"]["dscLograd"]) ? "\'".$trabalhador["endereco"]["brasil"]["dscLograd"]."\'" : "null";
+        $nrlograd = isset($trabalhador["endereco"]["brasil"]["nrLograd"]) ? "\'".$trabalhador["endereco"]["brasil"]["nrLograd"]."\'" : "null";
         $complemento = "null";
-        $bairro = "\'".$trabalhador["endereco"]["brasil"]["bairro"]."\'";
-        $cep = "\'".$trabalhador["endereco"]["brasil"]["cep"]."\'";
-        $codmunic = "\'".$trabalhador["endereco"]["brasil"]["codMunic"]."\'";
-        $uf = "\'".$trabalhador["endereco"]["brasil"]["uf"]."\'";
+        $bairro = isset($trabalhador["endereco"]["brasil"]["bairro"]) ? "\'".$trabalhador["endereco"]["brasil"]["bairro"]."\'" : "null";
+        $cep = isset($trabalhador["endereco"]["brasil"]["cep"]) ? "\'".$trabalhador["endereco"]["brasil"]["cep"]."\'" : "null";
+        $codmunic = isset($trabalhador["endereco"]["brasil"]["codMunic"]) ? "\'".$trabalhador["endereco"]["brasil"]["codMunic"]."\'" : "null";
+        $uf = isset($trabalhador["endereco"]["brasil"]["uf"]) ? "\'".$trabalhador["endereco"]["brasil"]["uf"]."\'" : "null";
         $tmpresid = "null";
         $conding = "null";
-        $deffisica = "\'".$trabalhador["infoDeficiencia"]["defFisica"]."\'"; 
-        $defvisual = "\'".$trabalhador["infoDeficiencia"]["defVisual"]."\'";
-        $defauditiva = "\'".$trabalhador["infoDeficiencia"]["defAuditiva"]."\'";
-        $defmental = "\'".$trabalhador["infoDeficiencia"]["defMental"]."\'";
-        $defintelectual = "\'".$trabalhador["infoDeficiencia"]["defIntelectual"]."\'";
-        $reabreadap = "\'".$trabalhador["infoDeficiencia"]["reabReadap"]."\'";
+        $deffisica = isset($trabalhador["infoDeficiencia"]["defFisica"]) ? "\'".$trabalhador["infoDeficiencia"]["defFisica"]."\'" : "null"; 
+        $defvisual = isset($trabalhador["infoDeficiencia"]["defVisual"]) ? "\'".$trabalhador["infoDeficiencia"]["defVisual"]."\'" : "null";
+        $defauditiva = isset($trabalhador["infoDeficiencia"]["defAuditiva"]) ? "\'".$trabalhador["infoDeficiencia"]["defAuditiva"]."\'" : "null";
+        $defmental = isset($trabalhador["infoDeficiencia"]["defMental"]) ? "\'".$trabalhador["infoDeficiencia"]["defMental"]."\'" : "null";
+        $defintelectual = isset($trabalhador["infoDeficiencia"]["defIntelectual"]) ? "\'".$trabalhador["infoDeficiencia"]["defIntelectual"]."\'" : "null";
+        $reabreadap = isset($trabalhador["infoDeficiencia"]["reabReadap"]) ? "\'".$trabalhador["infoDeficiencia"]["reabReadap"]."\'" : "null";
         $infocota = "null";
         $observacao_infodeficiencia = "null";
         $foneprinc = "null";
         $emailprinc = "null";
 
-        $matricula = "\'".$vinculo["matricula"]."\'";
-        $tpregtrab = "\'".$vinculo["tpRegTrab"]."\'";
-        $tpregprev = "\'".$vinculo["tpRegPrev"]."\'";
-        $cadini = "\'".$vinculo["cadIni"]."\'";
+        $matricula = isset($vinculo["matricula"]) ? "\'".$vinculo["matricula"]."\'" : "null";
+        $tpregtrab = isset($vinculo["tpRegTrab"]) ? "\'".$vinculo["tpRegTrab"]."\'" : "null";
+        $tpregprev = isset($vinculo["tpRegPrev"]) ? "\'".$vinculo["tpRegPrev"]."\'" : "null";
+        $cadini = isset($vinculo["cadIni"]) ? "\'".$vinculo["cadIni"]."\'" : "null";
         $dtadm = "null";
         $tpadmissao = "null";
         $indadmissao = "null";
@@ -106,19 +106,19 @@ class XmlReaderFormController extends Controller {
         $nrinsc_ideestabvinc = "null";
         $tpinsc_aprend = "null";
         $nrinsc_aprend = "null";
-        $tpprov = "\'".$vinculo["infoRegimeTrab"]["infoEstatutario"]["tpProv"]."\'";
-        $dtexercicio = "\'".$vinculo["infoRegimeTrab"]["infoEstatutario"]["dtExercicio"]."\'";
+        $tpprov = isset($vinculo["infoRegimeTrab"]["infoEstatutario"]["tpProv"]) ? "\'".$vinculo["infoRegimeTrab"]["infoEstatutario"]["tpProv"]."\'" : "null";
+        $dtexercicio = isset($vinculo["infoRegimeTrab"]["infoEstatutario"]["dtExercicio"]) ? "\'".$vinculo["infoRegimeTrab"]["infoEstatutario"]["dtExercicio"]."\'" : "null";
         $tpplanrp = "null";
         $indtetorgps = "null";
         $indabonoperm = "null";
         $dtiniabono = "null";
-        $nmcargo = "\'".$vinculo["infoContrato"]["nmCargo"]."\'";
-        $cbocargo = "\'".$vinculo["infoContrato"]["CBOCargo"]."\'";
+        $nmcargo = isset($vinculo["infoContrato"]["nmCargo"]) ? "\'".$vinculo["infoContrato"]["nmCargo"]."\'" : "null";
+        $cbocargo = isset($vinculo["infoContrato"]["CBOCargo"]) ? "\'".$vinculo["infoContrato"]["CBOCargo"]."\'" : "null";
         $dtingrcargo = "null";
-        $nmfuncao = "\'".$vinculo["infoContrato"]["nmFuncao"]."\'";
-        $cbofuncao = "\'".$vinculo["infoContrato"]["CBOFuncao"]."\'";
-        $acumcargo = "\'".$vinculo["infoContrato"]["acumCargo"]."\'";
-        $codcateg = "\'".$vinculo["infoContrato"]["codCateg"]."\'";
+        $nmfuncao = isset($vinculo["infoContrato"]["nmFuncao"]) ? "\'".$vinculo["infoContrato"]["nmFuncao"]."\'" : "null";
+        $cbofuncao = isset($vinculo["infoContrato"]["CBOFuncao"]) ? "\'".$vinculo["infoContrato"]["CBOFuncao"]."\'" : "null";
+        $acumcargo = isset($vinculo["infoContrato"]["acumCargo"]) ? "\'".$vinculo["infoContrato"]["acumCargo"]."\'" : "null";
+        $codcateg = isset($vinculo["infoContrato"]["codCateg"]) ? "\'".$vinculo["infoContrato"]["codCateg"]."\'" : "null";
         $vrsalfx = "null";
         $undsalfixo = "null";
         $dscsalvar = "null";
@@ -126,8 +126,8 @@ class XmlReaderFormController extends Controller {
         $dtterm = "null";
         $clauassec = "null";
         $objdet = "null";
-        $tpinsc_localtrabgeral = "\'".$vinculo["infoContrato"]["localTrabalho"]["localTrabGeral"]["tpInsc"]."\'";
-        $nrinsc_localtrabgeral = "\'".$vinculo["infoContrato"]["localTrabalho"]["localTrabGeral"]["nrInsc"]."\'";
+        $tpinsc_localtrabgeral = isset($vinculo["infoContrato"]["localTrabalho"]["localTrabGeral"]["tpInsc"]) ? "\'".$vinculo["infoContrato"]["localTrabalho"]["localTrabGeral"]["tpInsc"]."\'" : "null";
+        $nrinsc_localtrabgeral = isset($vinculo["infoContrato"]["localTrabalho"]["localTrabGeral"]["nrInsc"]) ? "\'".$vinculo["infoContrato"]["localTrabalho"]["localTrabGeral"]["nrInsc"]."\'" : "null";
 
         $desccomp_localtrabgeral = "null";
         $tplograd_localtempdom  = "null";
@@ -157,14 +157,16 @@ class XmlReaderFormController extends Controller {
         $codmotafast = "null";
         $dtdeslig = "null";
         $dtinicessao = "null";
-        $situacao = 1;
-        $tipo = "\'I\'";
-        $criado_por = 1;
-        $alterado_por = 1;
         $matanotjud = "null";
         $indaprend = "null";
         $cnpjentqual = "null";
         $cnpjprat = "null";
+
+        //CAMPOS FIXOS
+        $situacao = 1;
+        $tipo = "\'I\'";
+        $criado_por = 1;
+        $alterado_por = 1;
     
         $query = "INSERT INTO esocial.s2200 (idevento, indretif, nrrecibo, tpamb, procemi, verproc, tpinsc, nrinsc, cpftrab, nmtrab, sexo, racacor, estciv, grauinstr, nmsoc, dtnascto, paisnascto, paisnac, tplograd, dsclograd, nrlograd, complemento, bairro, cep, codmunic, uf, tmpresid, conding, deffisica, defvisual, defauditiva, defmental, defintelectual, reabreadap, infocota, observacao_infodeficiencia, foneprinc, emailprinc, matricula, tpregtrab, tpregprev, cadini, dtadm, tpadmissao, indadmissao, nrproctrab, tpregjor, natatividade, dtbase, cnpjsindcategprof, dtopcfgts, hipleg, justcontr, tpinsc_ideestabvinc, nrinsc_ideestabvinc, tpinsc_aprend, nrinsc_aprend, tpprov, dtexercicio, tpplanrp, indtetorgps, indabonoperm, dtiniabono, nmcargo, cbocargo, dtingrcargo, nmfuncao, cbofuncao, acumcargo, codcateg, vrsalfx, undsalfixo, dscsalvar, tpcontr, dtterm, clauassec, objdet, tpinsc_localtrabgeral, nrinsc_localtrabgeral, desccomp_localtrabgeral, tplograd_localtempdom, dsclograd_localtempdom, nrlograd_localtempdom, complemento_localtempdom, bairro_localtempdom, cep_localtempdom, codmunic_localtempdom, uf_localtempdom, qtdhrssem, tpjornada, tmpparc, hornoturno, dscjorn, nrprocjud, tpinsc_sucessaovinc, nrinsc_sucessaovinc, matricant_sucessaovinc, dttransf_sucessaovinc, observacao_sucessaovinc, cpfant, matricant, dtaltcpf, observacao_mudancacpf, dtiniafast, codmotafast, dtdeslig, dtinicessao, situacao, tipo, criado_por, alterado_por, matanotjud, indaprend, cnpjentqual, cnpjprat)\n"
             . "VALUES($idevento, $indretif, $nrrecibo, $tpamb, $procemi, $verproc, $tpinsc, $nrinsc, $cpftrab, $nmtrab, $sexo, $racacor, $estciv, $grauinstr, $nmsoc, $dtnascto, $paisnascto, $paisnac, $tplograd, $dsclograd, $nrlograd, $complemento, $bairro, $cep, $codmunic, $uf, $tmpresid, $conding, $deffisica, $defvisual, $defauditiva, $defmental, $defintelectual, $reabreadap, $infocota, $observacao_infodeficiencia, $foneprinc, $emailprinc, $matricula, $tpregtrab, $tpregprev, $cadini, $dtadm, $tpadmissao, $indadmissao, $nrproctrab, $tpregjor, $natatividade, $dtbase, $cnpjsindcategprof, $dtopcfgts, $hipleg, $justcontr, $tpinsc_ideestabvinc, $nrinsc_ideestabvinc, $tpinsc_aprend, $nrinsc_aprend, $tpprov, $dtexercicio, $tpplanrp, $indtetorgps, $indabonoperm, $dtiniabono, $nmcargo, $cbocargo, $dtingrcargo, $nmfuncao, $cbofuncao, $acumcargo, $codcateg, $vrsalfx, $undsalfixo, $dscsalvar, $tpcontr, $dtterm, $clauassec, $objdet, $tpinsc_localtrabgeral, $nrinsc_localtrabgeral, $desccomp_localtrabgeral, $tplograd_localtempdom, $dsclograd_localtempdom, $nrlograd_localtempdom, $complemento_localtempdom, $bairro_localtempdom, $cep_localtempdom, $codmunic_localtempdom, $uf_localtempdom, $qtdhrssem, $tpjornada, $tmpparc, $hornoturno, $dscjorn, $nrprocjud, $tpinsc_sucessaovinc, $nrinsc_sucessaovinc, $matricant_sucessaovinc, $dttransf_sucessaovinc, $observacao_sucessaovinc, $cpfant, $matricant, $dtaltcpf, $observacao_mudancacpf, $dtiniafast, $codmotafast, $dtdeslig, $dtinicessao, $situacao, $tipo, $criado_por, $alterado_por, $matanotjud, $indaprend, $cnpjentqual, $cnpjprat);";
@@ -174,16 +176,18 @@ class XmlReaderFormController extends Controller {
 
     private function generate_historico_query($xml)
     {
-        $idevento = "\'".$xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]."\'";
+        $idevento = isset($xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]) ? "\'".$xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["@attributes"]["Id"]."\'" : "null";
+        $protocolo = isset($xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recepcao"]["protocoloEnvioLote"]) ? "\'".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recepcao"]["protocoloEnvioLote"]."\'" : "null";
+        $cnpj = isset($_POST['cnpj']) ? "\'".$_POST['cnpj']."\'" : "null";
+        $nr_recibo = isset($xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]) ? "\'".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]."\'" : "null";
+        
+        //CAMPOS FIXOS
         $evento = "\'"."S2200"."\'";
         $status = "\'"."P"."\'";
         $criado_por = 1;
         $alterado_por = 1;
-        $message = "\"201 - Lote processado com sucesso.  - \"";
-        $protocolo = "\'".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recepcao"]["protocoloEnvioLote"]."\'";
-        $cnpj = "\'".$_POST['cnpj']."\'";
-        $nr_recibo = "\'".$xml["retornoProcessamentoDownload"]["recibo"]["eSocial"]["retornoEvento"]["recibo"]["nrRecibo"]."\'";
-        
+        $message = "\'201 - Lote processado com sucesso.  - \'";
+
         $insertQuery = "INSERT INTO esocial.historico (idevento, evento, status, criado_por, alterado_por, message, protocolo, cnpj, nr_recibo)\n"
             . "VALUES ($idevento, $evento, $status, $criado_por, $alterado_por, $message, $protocolo, $cnpj, $nr_recibo);";
         $updateQuery = "UPDATE esocial.historico h SET evento_id = s.id FROM esocial.s2200 s WHERE h.evento = 'S2200' AND h.idevento = s.idevento;";
@@ -199,18 +203,20 @@ class XmlReaderFormController extends Controller {
         $matricula = $xml["retornoProcessamentoDownload"]["evento"]["eSocial"]["evtAdmissao"]["vinculo"]["matricula"];
 
 
-        $tpdep = "\'".$dependente["tpDep"]."\'";
-        $nmdep = "\'".$dependente["nmDep"]."\'";
-        $dtnascto = "\'".$dependente["dtNascto"]."\'";
-        $cpfdep = "\'".$dependente["cpfDep"]."\'";
+        $tpdep = isset($dependente["tpDep"]) ? "\'".$dependente["tpDep"]."\'" : "null";
+        $nmdep = isset($dependente["nmDep"]) ? "\'".$dependente["nmDep"]."\'" : "null";
+        $dtnascto = isset($dependente["dtNascto"]) ? "\'".$dependente["dtNascto"]."\'" : "null";
+        $cpfdep = isset($dependente["cpfDep"]) ? "\'".$dependente["cpfDep"]."\'" : "null";
         $sexodep = "null";
-        $depirrf = "\'".$dependente["depIRRF"]."\'";
-        $depsf = "\'".$dependente["depSF"]."\'";
-        $inctrab = "\'".$dependente["incTrab"]."\'";
+        $descrdep = "null";
+        $depirrf = isset($dependente["depIRRF"]) ? "\'".$dependente["depIRRF"]."\'" : "null";
+        $depsf = isset($dependente["depSF"]) ? "\'".$dependente["depSF"]."\'" : "null";
+        $inctrab = isset($dependente["incTrab"]) ? "\'".$dependente["incTrab"]."\'" : "null";
+        
+        //CAMPOS FIXOS
         $criado_por = 1;
         $alterado_por = 1;
-        $descrdep = "null";
-
+        
         $query = "INSERT INTO esocial.s2200_dependente (tpdep, nmdep, dtnascto, cpfdep, sexodep, depirrf, depsf, inctrab, s2200_id, criado_por, alterado_por, descrdep) "
             . "VALUES($tpdep, $nmdep, $dtnascto, $cpfdep, $sexodep, $depirrf, $depsf, $inctrab, (SELECT id FROM esocial.s2200 s WHERE s.matricula = $matricula), $criado_por, $alterado_por, $descrdep);";
     
